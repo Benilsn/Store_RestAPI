@@ -15,12 +15,12 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UserModelDTO {
 
-    @JsonProperty(access = Access.READ_ONLY)
+    @JsonIgnore
     private Long id;
 
     private String email;
 
-    @JsonProperty(access = Access.READ_ONLY)
+    @JsonProperty(access = Access.WRITE_ONLY)
     private String user_password;
 
     private String full_name;

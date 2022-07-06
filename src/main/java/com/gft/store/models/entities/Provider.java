@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,18 +14,23 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "tb_branches")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Branch {
+@Table(name = "tb_providers")
+public class Provider {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String branch_name;
+    private String cnpj;
+
+    private String provider_name;
+
+    private String phone;
+
+    private String email;
 
     @Embedded
     private Address address;
-
 }

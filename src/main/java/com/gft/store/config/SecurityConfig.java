@@ -16,8 +16,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private AuthenticationManager authenticationManager;
-
     @Autowired
     private UserService userService;
 
@@ -28,11 +26,12 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationManager getAuthenticationManager(HttpSecurity http) throws Exception {
+
         AuthenticationManagerBuilder authenticationManagerBuilder = http
                 .getSharedObject(AuthenticationManagerBuilder.class);
         authenticationManagerBuilder.userDetailsService(userService).passwordEncoder(encoder());
         // authenticationManagerBuilder.inMemoryAuthentication().withUser("user").password(encoder().encode("123")).roles("USER");
-        authenticationManager = authenticationManagerBuilder.build();
+        AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
         return authenticationManager;
     }
 
@@ -41,7 +40,8 @@ public class SecurityConfig {
 
         http.authorizeRequests()
                 .anyRequest()
-                .authenticated()
+                .permitAll()
+                // .authenticated()
                 .and()
                 .formLogin()
                 .permitAll()
@@ -50,6 +50,9 @@ public class SecurityConfig {
                 .and()
                 .authenticationManager(getAuthenticationManager(http))
                 .httpBasic();
+
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
 
         return http.build();
     }

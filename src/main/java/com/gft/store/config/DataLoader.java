@@ -1,5 +1,7 @@
 package com.gft.store.config;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,9 +29,10 @@ public class DataLoader implements CommandLineRunner {
         final Role ADMIN = roleRepository.findById(1l).get();
         final Role USER = roleRepository.findById(2l).get();
 
-        UserModel admin = new UserModel("benilson@gft.com", encoder.encode("123"), "Benilson de SM", ADMIN);
+        UserModel admin = new UserModel("admin@gft.com", encoder.encode("123"), "Admin", ADMIN);
+        UserModel user = new UserModel("user@gft.com", encoder.encode("123"), "User", USER);
 
-        // userRepository.save(admin);
+        // userRepository.saveAll(List.of(admin, user));
 
     }
 

@@ -1,5 +1,6 @@
 package com.gft.store.services;
 
+import java.util.List;
 import java.util.Set;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,7 +28,10 @@ public class UserService implements UserDetailsService {
                 user.getEmail(),
                 user.getUser_password(),
                 Set.of(user.getRole()));
+    }
 
+    public List<UserModel> getAll() {
+        return repository.findAll();
     }
 
 }

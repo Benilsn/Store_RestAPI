@@ -11,12 +11,18 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BranchDTO {
+public class ProviderDTO {
 
     @JsonIgnore
     private Long id;
 
-    private String branch_name;
+    private String cnpj;
+
+    private String provider_name;
+
+    private String phone;
+
+    private String email;
 
     private Address address;
 }

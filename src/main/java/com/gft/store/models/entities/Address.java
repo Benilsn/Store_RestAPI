@@ -1,10 +1,6 @@
 package com.gft.store.models.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,15 +8,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
-@Table(name = "tb_addresses")
 @NoArgsConstructor
 @AllArgsConstructor
+@Embeddable
 public class Address {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     private String street_name;
 

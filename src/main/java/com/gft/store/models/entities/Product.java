@@ -1,11 +1,9 @@
 package com.gft.store.models.entities;
 
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,18 +13,19 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "tb_branches")
+@Table(name = "tb_products")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Branch {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String branch_name;
+    private String product_name;
 
-    @Embedded
-    private Address address;
+    private String product_description;
+
+    private String product_unity;
 
 }
