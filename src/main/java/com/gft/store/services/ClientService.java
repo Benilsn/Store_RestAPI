@@ -2,6 +2,8 @@ package com.gft.store.services;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.gft.store.exceptions.ClientNotFoundException;
 import com.gft.store.models.entities.Client;
@@ -15,8 +17,8 @@ public class ClientService implements IService<Client> {
     private ClientRepository repository;
 
     @Override
-    public List<Client> getAll() {
-        return repository.findAll();
+    public Page<Client> getAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     @Override

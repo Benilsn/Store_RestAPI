@@ -1,9 +1,9 @@
 package com.gft.store.services;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import com.gft.store.exceptions.ProviderNotFoundException;
 import com.gft.store.models.entities.Provider;
 import com.gft.store.repositories.ProviderRepository;
@@ -16,8 +16,8 @@ public class ProviderService implements IService<Provider> {
     private ProviderRepository repository;
 
     @Override
-    public List<Provider> getAll() {
-        return repository.findAll();
+    public Page<Provider> getAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     @Override

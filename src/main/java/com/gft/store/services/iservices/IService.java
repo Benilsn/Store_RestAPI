@@ -1,10 +1,11 @@
 package com.gft.store.services.iservices;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface IService<T> {
 
-    public List<T> getAll();
+    public Page<T> getAll(Pageable pageable);
 
     public T getById(Long id);
 

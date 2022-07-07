@@ -1,7 +1,8 @@
 package com.gft.store.services;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.gft.store.exceptions.ProductNotFoundException;
 import com.gft.store.models.entities.Product;
@@ -15,8 +16,8 @@ public class ProductService implements IService<Product> {
     private ProductRepository repository;
 
     @Override
-    public List<Product> getAll() {
-        return repository.findAll();
+    public Page<Product> getAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     @Override

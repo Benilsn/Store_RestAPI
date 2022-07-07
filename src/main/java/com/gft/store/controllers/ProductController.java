@@ -3,6 +3,8 @@ package com.gft.store.controllers;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -31,9 +33,9 @@ public class ProductController {
     private ModelMapper mapper;
 
     @GetMapping("/")
-    public ResponseEntity<?> getAll() {
+    public ResponseEntity<?> getAll(@PageableDefault Pageable pageable) {
 
-        var products = service.getAll()
+        var products = service.getAll(pageable)
                 .stream()
                 .map(b -> mapper.map(b, ProductDTO.class))
                 .collect(Collectors.toList());
