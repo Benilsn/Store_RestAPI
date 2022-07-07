@@ -1,8 +1,6 @@
 package com.gft.store.services;
 
 import java.util.List;
-import java.util.Set;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
@@ -21,17 +19,15 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) {
-        UserModel user = repository.findByEmail(username)
-                .orElseThrow(() -> new UserNotFoundException("User Not found!"));
-
-        return new User(
-                user.getEmail(),
-                user.getUser_password(),
-                Set.of(user.getRole()));
+        return repository.findByEmail(username).orElseThrow(() -> new UserNotFoundException("User Not found!"));
     }
 
     public List<UserModel> getAll() {
         return repository.findAll();
+    }
+
+    public UserModel getById(Long id) {
+        return repository.findById(id).orElseThrow(() -> new UserNotFoundException("User Not found!"));
     }
 
 }

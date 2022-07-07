@@ -1,8 +1,6 @@
 package com.gft.store.models.entities;
 
 import javax.persistence.Embeddable;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;

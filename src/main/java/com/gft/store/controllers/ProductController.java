@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.gft.store.exceptions.ProductNotFoundException;
-import com.gft.store.models.dtos.BranchDTO;
 import com.gft.store.models.dtos.ProductDTO;
 import com.gft.store.models.entities.Product;
 import com.gft.store.services.ProductService;
