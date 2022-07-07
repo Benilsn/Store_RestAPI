@@ -1,5 +1,8 @@
 package com.gft.store.models.dtos;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import org.hibernate.validator.constraints.br.CPF;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gft.store.models.entities.Address;
 import lombok.AllArgsConstructor;

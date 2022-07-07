@@ -1,10 +1,15 @@
 package com.gft.store.controllers;
 
 import java.util.stream.Collectors;
+
+import javax.validation.ConstraintViolationException;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,14 +57,16 @@ public class ClientController {
         }
     }
 
+    @Validated
     @PostMapping("/")
-    public ResponseEntity<ClientDTO> save(@RequestBody ClientDTO clientDTO) {
+    public ResponseEntity<?> save(@RequestBody ClientDTO clientDTO) {
 
         service.save(mapper.map(clientDTO, Client.class));
-
         return new ResponseEntity<ClientDTO>(clientDTO, HttpStatus.CREATED);
+
     }
 
+    @Validated
     @PutMapping("/{id}")
     public ResponseEntity<?> updateById(@PathVariable Long id, @RequestBody ClientDTO productDTO) {
         try {

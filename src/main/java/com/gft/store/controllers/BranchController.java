@@ -5,6 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,6 +53,7 @@ public class BranchController {
         }
     }
 
+    @Validated
     @PostMapping("/")
     public ResponseEntity<BranchDTO> save(@RequestBody BranchDTO branchDTO) {
 
@@ -60,6 +62,7 @@ public class BranchController {
         return new ResponseEntity<BranchDTO>(branchDTO, HttpStatus.CREATED);
     }
 
+    @Validated
     @PutMapping("/{id}")
     public ResponseEntity<?> updateById(@PathVariable Long id, @RequestBody BranchDTO branchDTO) {
         try {
