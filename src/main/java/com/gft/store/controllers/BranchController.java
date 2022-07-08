@@ -17,11 +17,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.gft.store.exceptions.BranchNotFoundException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import com.gft.store.models.dtos.BranchDTO;
 import com.gft.store.models.entities.Branch;
 import com.gft.store.services.BranchService;
 
 @RestController
+@PreAuthorize(value = "hasAuthority('ADMIN')")
 @RequestMapping("/v1/branches")
 public class BranchController {
 

@@ -17,8 +17,8 @@ import com.gft.store.models.forms.LoginForm;
 @Service
 public class AuthService {
 
-    // @Autowired
-    // private AuthenticationManager manager;
+    @Autowired
+    private AuthenticationManager manager;
 
     @Value("${store.jwt.secret}")
     private String secret;
@@ -31,16 +31,12 @@ public class AuthService {
 
     public TokenDTO authenticate(LoginForm loginForm) {
 
-        // var auth = manager
-        // .authenticate(new UsernamePasswordAuthenticationToken(loginForm.getEmail(),
-        // loginForm.getPassword()));
-        String token = generateToken(null);
+        var auth = manager
+                .authenticate(new UsernamePasswordAuthenticationToken(loginForm.getEmail(),
+                        loginForm.getPassword()));
+        String token = generateToken(auth);
 
         return new TokenDTO(token);
-    }
-
-    private Algorithm createAlgorithm() {
-        return Algorithm.HMAC256(secret);
     }
 
     private String generateToken(Authentication auth) {
@@ -55,8 +51,12 @@ public class AuthService {
                 .sign(createAlgorithm());
     }
 
+    private Algorithm createAlgorithm() {
+        return Algorithm.HMAC256(secret);
+    }
+
     public boolean checkToken(String token) {
-        if (token.equals(null)) {
+        if (token == null) {
             return false;
         }
 
@@ -69,7 +69,7 @@ public class AuthService {
     }
 
     public Long returnUserId(String token) {
-        var userId = JWT.require(createAlgorithm()).withIssuer(issuer).build().verify(token).getSubject();
+        String userId = JWT.require(createAlgorithm()).withIssuer(issuer).build().verify(token).getSubject();
 
         return Long.parseLong(userId);
     }

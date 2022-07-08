@@ -30,7 +30,7 @@ public class AuthFilter extends OncePerRequestFilter {
         String header = request.getHeader("Authorization");
         String token = null;
 
-        if (header.equals(null) && header.startsWith("Bearer ")) {
+        if (header != null && header.startsWith("Bearer ")) {
             token = header.substring(7, header.length());
         }
 
@@ -38,7 +38,8 @@ public class AuthFilter extends OncePerRequestFilter {
             Long userId = authService.returnUserId(token);
             UserModel user = userService.getById(userId);
             SecurityContextHolder.getContext().setAuthentication(
-                    new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities()));
+                    new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword(),
+                            user.getAuthorities()));
         }
 
         filterChain.doFilter(request, response);

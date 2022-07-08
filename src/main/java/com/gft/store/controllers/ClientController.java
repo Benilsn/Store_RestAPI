@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ import com.gft.store.models.entities.Client;
 import com.gft.store.services.ClientService;
 
 @RestController
+@PreAuthorize(value = "hasAuthority('ADMIN')")
 @RequestMapping("/v1/clients")
 public class ClientController {
 
