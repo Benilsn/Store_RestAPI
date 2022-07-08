@@ -33,6 +33,10 @@ public class UserModel implements UserDetails {
     private String full_name;
 
     @OneToOne
+    @JoinColumn(name = "branch_id")
+    private Branch branch;
+
+    @OneToOne
     @JoinColumn(name = "role_id")
     private Role role;
 
