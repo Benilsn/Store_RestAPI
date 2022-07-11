@@ -33,8 +33,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager getAuthenticationManager(HttpSecurity http)
-            throws Exception {
+    public AuthenticationManager getAuthenticationManager(HttpSecurity http) throws Exception {
 
         AuthenticationManagerBuilder authenticationManagerBuilder = http
                 .getSharedObject(AuthenticationManagerBuilder.class);
@@ -48,15 +47,14 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/sales/").permitAll()
                 .antMatchers(HttpMethod.POST, "/auth/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/auth/**").permitAll()
                 .anyRequest().authenticated()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authenticationManager(getAuthenticationManager(http))
-                .addFilterBefore(new AuthFilter(authService, userService),
-                        UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new AuthFilter(authService, userService), UsernamePasswordAuthenticationFilter.class)
                 .httpBasic();
 
         return http.build();
