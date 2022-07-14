@@ -1,22 +1,28 @@
-version: '1'
+version: '3'
 services:
   app:
+    container_name: app
     image: storeapi
     ports:
      - 9090:8080
     environment:
-     - MYSQL_HOST=mysql
+     - MYSQL_HOST=db
      - MYSQL_USER=root
      - MYSQL_PASSWORD=root
      - MYSQL_PORT=3306
     depends_on:
-      - mysql
-    command: ["./wait-for-it.sh", "db:5432", "--", "python", "app.py"]
+      db:
+        condition: service_healthy
 
-  mysql:
+  db:
+    container_name: db
     image: mysql
     ports:
      - 3307:3306
     environment:
      - MYSQL_ROOT_PASSWORD=root
      - MYSQL_DATABASE=root
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
