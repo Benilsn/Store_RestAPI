@@ -25,7 +25,7 @@ public class BusinessController {
 
     @Validated
     @PostMapping("/v1/auth/purchases/")
-    public ResponseEntity<?> buy(@ReqstBody PurchaseOrder order) {
+    public ResponseEntity<?> buy(@RequestBody PurchaseOrder order) {
         try {
             return ResponseEntity.ok().body(service.makeBuy(order));
         } catch (InvalidPurchaseRequestException e) {
